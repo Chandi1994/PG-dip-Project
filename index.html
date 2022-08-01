@@ -1,0 +1,434 @@
+
+
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Cervical Cancer Prediction System</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  
+</head>
+
+<body style="background: #000;">
+ <div class="login">
+	<h1>Cervical Cancer Prediction System</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+
+	    <div class="row">
+		    <div class="column">
+			    <label>Age of the patient: </label><br>
+			    <input type="text" name="age" placeholder="Age" required="required" />
+		    </div>
+		    <div class="column">
+			    <label>Number of Sexual Partners: </label>
+			    <input type="text" name="Number of Sexual Partners" placeholder="Number of Sexual Partners" required="required" />
+		    </div>
+		    <div class="column">
+			    <label>First Sexual intercourse: </label>
+			    <input type="text" name="Age when has First Sexual intercourse" placeholder="Age when has First Sexual intercourse" required="required" />
+		    </div>
+		    <div class="column">
+			    <label>Number of Pregnancies: </label><br>
+			    <input type="text" name="Number of Pregnancies" placeholder="Number of Pregnancies" required="required" />
+		    </div>
+	    </div>
+
+	    <div class="row">
+
+		    <div class="column" style="width: 60%;">
+			    <label>Presence of Human papillomaviruses :-</label>
+			    <div class="wrapper" style="margin-left:110px;">
+				    <input type="radio" name="std2" id="std2-1" value=1>
+				    <label for="std2-1" class="option std2-1">
+					    <div class="dot"></div>
+					    <span>Yes</span>
+				    </label>
+				    <input type="radio" name="std2" id="std2-2" value=0>
+				    <label for="std2-2" class="option std2-2">
+					    <div class="dot"></div>
+					    <span>No</span>
+				    </label>
+			    </div>
+		    </div>
+
+
+		    <div class="column" style="width: 40%;">
+		    <label>Hormonal Contraceptives :- </label>
+			    <div class="wrapper">
+				    <input type="radio" name="Hormonal" id="option-1" value=1>
+				    <label for="option-1" class="option option-1">
+					    <div class="dot"></div>
+					    <span>Yes</span>
+				    </label>
+				    <input type="radio" name="Hormonal" id="option-2" value=0>
+				    <label for="option-2" class="option option-2">
+					    <div class="dot"></div>
+					    <span>No</span>
+				    </label>
+			    </div>
+		    </div>
+	    </div>
+
+
+
+
+
+	    <div class="row">
+		    <div class="Hormonal column" style="width: 40%; margin-left: 930px;">
+			    <label>Hormonal Contraceptives (Years):</label>
+			    <input class="Hormonal" type="text" name="Hormonal Contraceptives (years)" id="hormonal" placeholder="Hormonal Contraceptives (years)"/>
+		    </div>
+	    </div>
+
+
+	    <div class="row">
+		    <div class="column" style="width: 60%;">
+			    <label>Intra-Uterine Device Usage :- </label>
+			    <div class="wrapper" style="margin-left:192px;">
+				    <input type="radio" name="IUD" id="IUD-1" value=1>
+				    <label for="IUD-1" class="option IUD-1">
+					    <div class="dot"></div>
+					    <span>Yes</span>
+				    </label>
+				    <input type="radio" name="IUD" id="IUD-2" value=0>
+				    <label for="IUD-2" class="option IUD-2">
+					    <div class="dot"></div>
+					    <span>No</span>
+				    </label>
+			    </div>
+		    </div>
+
+
+		    <div class="column" style="width: 40%;">
+			    <label>Smoke                     :- </label>
+			    <div class="wrapper" style="margin-left:150px;">
+				    <input type="radio" name="smoke" id="smoke-1" value=1>
+				    <label for="smoke-1" class="option smoke-1">
+					    <div class="dot"></div>
+					    <span>Yes</span>
+				    </label>
+				    <input type="radio" name="smoke" id="smoke-2" value=0>
+				    <label for="smoke-2" class="option smoke-2">
+					    <div class="dot"></div>
+					    <span>No</span>
+				    </label>
+			    </div>
+		    </div>
+	    </div>
+
+	    <div class="row">
+		    <div class="IUD column" style="width: 40%; padding-right:75px;">
+			    <label>IUD Usage (Years):</label>
+			    <input class="IUD" type="text" name="IUD (years)" id="iud_years" placeholder="IUD (years)" />
+		    </div>
+		    <div class="smoke column" style="width: 60%; padding-top: 20px; float: right;">
+			    <label>Smoke (Years):</label>
+			    <input class="smoke" type="text" name="Smoke (Years)" id="smoke_years" placeholder="Smoke (Years)"/>
+			    <label>Smoke (Packs/Year):</label>
+			    <input class="smoke" type="text" name="Smoke (Packs/Year)" id="smoke_packs_year" placeholder="Smoke (Packs/Year)">
+		    </div>
+	    </div>
+
+
+
+	    
+
+		    <div class="row">
+			    <div class="column" style="width: 60%;">
+				    <label>Presence of Cancer after diagnose  :-  </label>
+				    <div class="wrapper" style="margin-left:132px;">
+					    <input type="radio" name="cancer" id="cancer-1" value=1>
+					    <label for="cancer-1" class="option cancer-1">
+						    <div class="dot"></div>
+						    <span>Yes</span>
+					    </label>
+					    <input type="radio" name="cancer" id="cancer-2" value=0>
+					    <label for="cancer-2" class="option cancer-2">
+						    <div class="dot"></div>
+						    <span>No</span>
+					    </label>
+				    </div>
+			    </div>
+			    <div class="column" style="width: 40%;">
+				    <label>Hinselmann :- </label>
+				    <div class="wrapper" style="margin-left:111px;">
+					    <input type="radio" name="hinselmann" id="hinselmann-1" value=1>
+					    <label for="hinselmann-1" class="option hinselmann-1">
+						    <div class="dot"></div>
+						    <span>Yes</span>
+					    </label>
+					    <input type="radio" name="hinselmann" id="hinselmann-2" value=0>
+					    <label for="hinselmann-2" class="option hinselmann-2">
+						    <div class="dot"></div>
+						    <span>No</span>
+					    </label>
+				    </div>
+			    </div>
+		    </div>
+<div class="row">
+	<div class="column" style="width: 60%;">
+		<label>Presence of Cervical intraepithelial neoplasia</label>
+	    <div class="wrapper" style="margin-left:62px;">
+			<input type="radio" name="std1" id="std1-1" value=1>
+			<label for="std1-1" class="option std1-1">
+				<div class="dot"></div>
+				<span>Yes</span>
+			</label>
+			<input type="radio" name="std1" id="std1-2" value=0>
+			<label for="std1-2" class="option std1-2">
+				<div class="dot"></div>
+				<span>No</span>
+			</label>
+		</div>
+	</div>
+	<div class="column" style="width: 40%;">
+		<label>Schiller :- </label>
+				    <div class="wrapper" style="margin-left:143px;">
+			<input type="radio" name="schiller" id="schiller-1" value=1>
+			<label for="schiller-1" class="option schiller-1">
+				<div class="dot"></div>
+				<span>Yes</span>
+			</label>
+			<input type="radio" name="schiller" id="schiller-2" value=0>
+			<label for="schiller-2" class="option schiller-2">
+				<div class="dot"></div>
+				<span>No</span>
+			</label>
+		</div>
+	</div>
+</div>
+<div class="row">
+	
+</div>
+
+<div class="row">
+	<div class="column" style="width: 60%;">
+		<label>Presence any one among cancer, CIN and HPV :- </label>
+				    <div class="wrapper" style="margin-left:35px;">
+			<input type="radio" name="std4" id="std4-1" value=1>
+			<label for="std4-1" class="option std4-1">
+				<div class="dot"></div>
+				<span>Yes</span>
+			</label>
+			<input type="radio" name="std4" id="std4-2" value=0>
+			<label for="std4-2" class="option std4-2">
+				<div class="dot"></div>
+				<span>No</span>
+			</label>
+		</div>
+	</div>
+
+<div class="column" style="width: 40%;">
+		<label>Cytology :- </label>
+				    <div class="wrapper" style="margin-left:135px;">
+			<input type="radio" name="cytology" id="cytology-1" value=1>
+			<label for="cytology-1" class="option cytology-1">
+				<div class="dot"></div>
+				<span>Yes</span>
+			</label>
+			<input type="radio" name="cytology" id="cytology-2" value=0>
+			<label for="cytology-2" class="option cytology-2">
+				<div class="dot"></div>
+				<span>No</span>
+			</label>
+		</div>
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="column" style="width: 60%;">
+		<label>Presence of Sexually Transmitted Diseases  :- </label>
+		<div class="wrapper" style="margin-left:63px;">
+			<input type="radio" name="STD" id="STD-1" value=1>
+			<label for="STD-1" class="option STD-1">
+				<div class="dot"></div>
+				<span>Yes</span>
+			</label>
+			<input type="radio" name="STD" id="STD-2" value=0>
+			<label for="STD-2" class="option STD-2">
+				<div class="dot"></div>
+				<span>No</span>
+			</label>
+		</div>
+	</div>
+	<br>
+	<br>
+</div>
+
+	<div class="STD row" style="padding-top: 20px;">
+		<div class="column" style="width:50%; padding-right:270px;">	
+			<label>Number of STDs:</label>
+			<input class="STD" type="text" name="STD (number)" id="std_number" placeholder="STD (number)">
+		</div>
+		<br>
+
+		<div class="container">
+			<div class="STD row">
+				<div class="column">	
+					<div class="items">
+						<input id="item1" name="item1" value=1 type="checkbox">
+						<label for="item1">Condylomatosis</label>
+					</div>
+				</div>
+				<div class="column">	
+					<div class="items">
+						<input id="item2" name="item2" value=1 type="checkbox">
+						<label for="item2">Cervical condylomatosis</label>
+					</div>
+				</div>
+				<div class="column">	
+					<div class="items">
+						<input id="item3" name="item3" value=1 type="checkbox">
+						<label for="item3">Vaginal condylomatosis</label>
+					</div>
+				</div>
+				<div class="column">	
+					<div class="items">
+						<input id="item4" name="item4" value=1 type="checkbox">
+						<label for="item4">Vulvo-perineal condylomatosis</label>
+					</div>
+				</div>
+			</div>
+			<div class="STD row" style="margin-left:-80px;">
+				<div class="column">	
+					<div class="items">
+						<input id="item5" name="item5" value=1 type="checkbox">
+						<label for="item5">Syphilis</label>
+					</div>
+				</div>
+				<div class="column">	
+					<div class="items">
+						<input id="item6" name="item6" value=1 type="checkbox">
+						<label for="item6">Pelvic inflammatory disease</label>
+					</div>
+				</div>
+				<div class="column">	
+					<div class="items">
+						<input id="item7" name="item7" value=1 type="checkbox">
+						<label for="item7">Genital herpes</label>
+					</div>
+				</div>
+				<div class="column">	
+					<div class="items">
+						<input id="item8" name="item8" value=1 type="checkbox">
+						<label for="item8">Molluscum contagiosum</label>
+					</div>
+				</div>
+			</div>
+			<div class="row" style="margin-left:-100px;">
+				<div class="column">	
+					<div class="items">
+						<input id="item9" name="item9" value=1 type="checkbox">
+						<label for="item9">AIDS</label>
+					</div>
+				</div>
+				<div class="column">	
+					<div class="items">
+						<input id="item10" name="item10" value=1 type="checkbox">
+						<label for="item10">HIV</label>
+					</div>
+				</div>
+				<div class="column">	
+					<div class="items">
+						<input id="item11" name="item11" value=1 type="checkbox">
+						<label for="item11">Hepatitis B</label>
+					</div>
+				</div>
+				<div class="column">	
+					<div class="items">
+						<input id="item12" name="item12" value=1 type="checkbox">
+						<label for="item12">HPV</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="column" style="width:50%; padding-right:220px;">	
+			<label>Number of diagnosis:</label>
+			<input class="STD" type="text" name="Number of diagnosis" id="number_of_diagnosis" placeholder="Number of diagnosis">
+		</div>
+</div>
+
+
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">Check Result</button>
+    </form>
+
+   <br>
+   <br>
+   {{ prediction_text }}
+
+ </div>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script>
+$(document).ready(function() {  
+$(".smoke").hide();
+$('input[name=smoke]').change(function(){
+	var checked = $('#smoke-1').is(':checked');
+	if (checked == true) {
+	$(".smoke").show();
+	} else {
+	$(".smoke").hide();
+	}
+});
+
+$(".Hormonal").hide();
+$('input[name=Hormonal]').change(function(){
+	var checked = $('#option-1').is(':checked');
+	if (checked == true) {
+	$(".Hormonal").show();
+	} else {
+	$(".Hormonal").hide();
+	}
+});
+
+$(".IUD").hide();
+$('input[name=IUD]').change(function(){
+	var checked = $('#IUD-1').is(':checked');
+	if (checked == true) {
+	$(".IUD").show();
+	} else {
+	$(".IUD").hide();
+	}
+});
+
+$(".STD").hide();
+$('input[name=STD]').change(function(){
+	var checked = $('#STD-1').is(':checked');
+	if (checked == true) {
+	$(".STD").show();
+	} else {
+	$(".STD").hide();
+	}
+});
+
+if ($("#smoke_years").val() == '') {
+	 $("#smoke_years").val(0);
+}
+if ($("#smoke_packs_year").val() == '') {
+	 $("#smoke_packs_year").val(0);
+}
+if ($("#hormonal").val() == '') {
+	 $("#hormonal").val(0);
+}
+if ($("#iud_years").val() == '') {
+	 $("#iud_years").val(0);
+}
+if ($("#number_of_diagnosis").val() == '') {
+	 $("#number_of_diagnosis").val(0);
+}
+if ($("#std_number").val() == '') {
+	 $("#std_number").val(0);
+}
+});
+</script>
+</body>
+</html>
+
+
